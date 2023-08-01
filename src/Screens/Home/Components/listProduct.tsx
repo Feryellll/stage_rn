@@ -20,7 +20,7 @@ const ProductList: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <Text>Loading...</Text>;
+    return <Text>Loading</Text>;
   }
   if (error) {
     return <Text>Error: {error}</Text>;
