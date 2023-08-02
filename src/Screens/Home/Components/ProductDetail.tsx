@@ -1,28 +1,41 @@
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
-import { Product } from '../../../Domain/product';
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigation, RouteProp } from '@react-navigation/native';
+import { fetchDetails } from '../../../Redux/FetchDetails/Actions';
+import { RootStackParamList } from '../../../Navigation/AppNavigator';
 
 interface ProductDetailProps {
-  loading: boolean;
-  product: Product;
-}
+  route: RouteProp<RootStackParamList, 'ProductDetail'>;}
 
-const ProductDetail: React.FC<ProductDetailProps> = () => {
-    const { product, loading, error } = useSelector((state: any) => state.productReducer);
-    const navigation = useNavigation();
-    if (loading) {
-        return <Text>Loading...</Text>;
-      }
+const ProductDetail: React.FC<ProductDetailProps> = ({ route }) => {
+  const dispatch = useDispatch();
+  const { product, loading, error } = useSelector((state: any) => state.productReducer);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const productId = route.params.productId;
+    dispatch(fetchDetails(productId));
+  }, []);
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (error) {
+    return <Text>Error: {error}</Text>;
+  }
+
+  if (!product) {
+    return <Text>No product details available.</Text>;
+  }
 
   return (
+    
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <View style={styles.backButton}>
-          <Text style={styles.backButtonText}>
+    <TouchableOpacity onPress={() => navigation.goBack()}>
+    <View style={styles.backButton}>
+    <Text style={styles.backButtonText}>
             <i className="fa fa-long-arrow-left" /> Back
           </Text>
         </View>
@@ -44,9 +57,9 @@ const ProductDetail: React.FC<ProductDetailProps> = () => {
         <Text style={styles.buyButtonText}>Buy</Text>
       </TouchableOpacity>
     </View>
+ 
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -90,8 +103,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textTransform: 'uppercase',
   },
- 
- 
   priceContainer: {
     flex: 1,
     justifyContent: 'flex-end',

@@ -1,14 +1,17 @@
-// App.tsx
+
 import React from 'react';
-import { Provider } from 'react-redux';
 import ProductList from './Components/listProduct';
+import ProductDetail from './Components/ProductDetail';
+import { View } from 'react-native';
 
 
 
 
 const Home: React.FC = () => {
   return (
+ 
       <ProductList/>
+     
   );
 };
 

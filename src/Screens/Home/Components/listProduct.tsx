@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Header from './Header';
 import { useNavigation } from '@react-navigation/native';
 import { fetchProducts } from '../../../Redux/FetchProduct/Actions'; 
-
+import { RootStackParamList } from '../../../Navigation/AppNavigator';
 
 
 
@@ -26,16 +26,13 @@ const ProductList: React.FC = () => {
     return <Text>Error: {error}</Text>;
   }
 
-
-
-
  const handleProductLike = (productId: number) => {
 
   };
 
 
 
-  const handleProductPress = (productId: number) => {
+  const navigateToProductDetail = (productId: number) => {
     navigation.navigate('ProductDetail', { productId });
   };
 
@@ -52,7 +49,7 @@ const ProductList: React.FC = () => {
         numColumns={3}
         renderItem={({ item }) => (
           <View style={styles.productContainer}>
-             <TouchableOpacity onPress={() => handleProductPress(item.id)}>
+             <TouchableOpacity onPress={() => navigateToProductDetail(item.id)}>
               <Image source={{ uri: item.image }} style={styles.productImage} />
               <Text style={styles.productName} numberOfLines={2}>{item.title}</Text>
               <Text style={styles.productPrice}>Price: ${item.price}</Text>
