@@ -1,3 +1,5 @@
+
+
 import React, { useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
@@ -29,6 +31,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ route }) => {
   if (!product) {
     return <Text>No product details available.</Text>;
   }
+
 
   return (
     
