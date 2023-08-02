@@ -5,12 +5,12 @@
  * @format
  */
 
-import React from 'react';
-import { View } from 'react-native';
+
 import NavRoot from './src/Navigation/Tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import store from './src/Redux/Store';
 import { Provider } from 'react-redux';
+import AppNavigator from './src/Navigation/AppNavigator';
 
 
 const App=()=>{
@@ -18,7 +18,8 @@ const App=()=>{
   return (
     <Provider store={store}>
     <NavigationContainer >
-     <NavRoot/>
+
+     <AppNavigator />
      </NavigationContainer>
      </Provider>
   );
