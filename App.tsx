@@ -6,7 +6,6 @@
  */
 
 
-import NavRoot from './src/Navigation/Tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import store from './src/Redux/Store';
 import { Provider } from 'react-redux';

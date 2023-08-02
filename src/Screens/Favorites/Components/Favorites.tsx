@@ -1,51 +1,39 @@
 import React, { useState } from 'react';
-import { Image } from 'react-native';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
-const CartScreen = () => {
-  const [cartItems, setCartItems] = useState([
+const FavoritesScreen = () => {
+  const [favoriteItems, setFavoriteItems] = useState([
     { id: '1', name: 'Produit 1', price: 10 },
-    { id: '2', name: 'Produit 2', price: 15 },
     { id: '3', name: 'Produit 3', price: 20 },
   ]);
 
-  const removeFromCart = (itemId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  const removeFromFavorites = (itemId:string) => {
+    setFavoriteItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
   };
 
 
-
-  const calculateTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + item.price, 0);
-  };
-
-  const CartItem = ({ item }) => {
+  const renderFavoriteItem = ({ item}) => {
     return (
-      <View style={styles.cartItemContainer}>
+      <View style={styles.favoriteItemContainer}>
         <Text style={styles.productName}>{item.name}</Text>
         <Text style={styles.productPrice}>{item.price} $</Text>
-        <TouchableOpacity onPress={() => removeFromCart(item.id)}>
+        <TouchableOpacity onPress={() => removeFromFavorites(item.id)}>
           <Image source={require('../../assets/icons/close.png')} style={styles.removeButton} />
         </TouchableOpacity>
       </View>
     );
   };
 
-
-
   return (
     <View style={styles.container}>
       <FlatList
-        data={cartItems}
-        renderItem={({ item }) => <CartItem item={item} />}
+        data={favoriteItems}
+        renderItem={renderFavoriteItem}
         keyExtractor={(item) => item.id}
         ListEmptyComponent={
-          <Text style={styles.emptyMessage}>Le panier est vide</Text>
+          <Text style={styles.emptyMessage}>Aucun article dans les favoris</Text>
         }
       />
-      <View style={styles.totalContainer}>
-        <Text style={styles.totalText}>Total : {calculateTotalPrice()} $</Text>
-      </View>
     </View>
   );
 };
@@ -56,12 +44,7 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f7f7f7',
   },
-  removeButton: {
-    width: 20,
-    height: 20,
-    tintColor: 'red',},
-
-  cartItemContainer: {
+  favoriteItemContainer: {
     backgroundColor: '#ffffff',
     padding: 16,
     marginVertical: 8,
@@ -84,7 +67,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#555555',
   },
- 
+  removeButton: {
+    width: 20,
+    height: 20,
+    tintColor: 'red',
+  },
   emptyMessage: {
     textAlign: 'center',
     fontSize: 18,
@@ -92,16 +79,6 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     color: '#555555',
   },
-  totalContainer: {
-    borderTopWidth: 1,
-    paddingTop: 8,
-    marginTop: 16,
-    alignItems: 'flex-end',
-  },
-  totalText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
 });
 
-export default CartScreen;
+export default FavoritesScreen;

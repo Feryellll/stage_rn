@@ -2,8 +2,8 @@ import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../Screens/Home/Home';
-import Categorie from '../Screens/Categories/Categorie';
-import Favorites from '../Screens/Favorites/Favorites';
+import Categorie from '../Screens/Categories/Components/Categorie';
+import Favorites from '../Screens/Favorites/Components/Favorites';
 import Cart from '../Screens/Cart/Cart';
 
 

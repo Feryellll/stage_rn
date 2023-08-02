@@ -32,9 +32,9 @@ const ProductList: React.FC = () => {
 
 
 
-  const navigateToProductDetail = (productId: number) => {
-    navigation.navigate('ProductDetail', { productId });
-  };
+const navigateToProductDetail = (productId: number) => {
+  navigation.navigate( 'ProductDetail', {productId}) ;
+};
 
 
 
