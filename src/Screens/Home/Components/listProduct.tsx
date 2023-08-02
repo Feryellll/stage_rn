@@ -35,9 +35,10 @@ const ProductList: React.FC = () => {
 
 
 
-  const handleProductPress = (productId: number) => {
-    navigation.navigate('ProductDetail', { productId });
-  };
+const handleProductPress = (productId: number) => {
+  navigation.navigate( 'ProductDetail', {productId}) ;
+};
+
 
 
 

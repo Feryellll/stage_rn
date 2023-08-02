@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
 const Header: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text>HELLO</Text>
+      <Text>filtrer</Text>
       <TextInput
         placeholder="Search..."
         style={styles.searchInput}

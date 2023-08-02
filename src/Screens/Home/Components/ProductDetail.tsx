@@ -1,22 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
-import { Product } from '../../../Domain/product';
-
-
+import { RootStackParamList } from '../../../Navigation/AppNavigator';
 
 interface ProductDetailProps {
-  loading: boolean;
-  product: Product;
+  route: RouteProp<RootStackParamList, 'ProductDetail'>;
 }
 
-const ProductDetail: React.FC<ProductDetailProps> = () => {
-    const { product, loading, error } = useSelector((state: any) => state.productReducer);
-    const navigation = useNavigation();
-    if (loading) {
-        return <Text>Loading...</Text>;
-      }
+const ProductDetail: React.FC<ProductDetailProps> = ({ route }) => {
+  const { product } = route.params;
+  const navigation = useNavigation(); 
 
   return (
     <View style={styles.container}>
