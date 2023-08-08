@@ -4,15 +4,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation, RouteProp } from '@react-navigation/native';
 import { fetchDetails } from '../../../Redux/FetchDetails/Actions';
 import { RootStackParamList } from '../../../Navigation/AppNavigator';
-
+import { addToCart } from '../../../Redux/Cart/Actions';
 interface ProductDetailProps {
   route: RouteProp<RootStackParamList, 'ProductDetail'>;}
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ route }) => {
+  console.log(route.params);
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector((state: any) => state.productReducer);
   const navigation = useNavigation();
-
+  //Add To Cart 
+  const addToCartHandler = () => {
+    dispatch(addToCart(product)); 
+  };
   useEffect(() => {
     const productId = route.params.productId;
     dispatch(fetchDetails(productId));
@@ -55,6 +59,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ route }) => {
       <Text style={styles.description}>{product.description}</Text>
       <TouchableOpacity style={styles.buyButton}>
         <Text style={styles.buyButtonText}>Buy</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.addToCartButton} onPress={addToCartHandler}>
+        <Text style={styles.addToCartButtonText}>Add to Cart</Text>
       </TouchableOpacity>
     </View>
  
@@ -127,6 +134,18 @@ const styles = StyleSheet.create({
     color: 'black',
     textTransform: 'uppercase',
   },
-});
+  addToCartButton: {
+    backgroundColor: 'black',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginTop: 20,
+  },
+  addToCartButtonText: {
+    color: 'white',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+}});
 
 export default ProductDetail;
